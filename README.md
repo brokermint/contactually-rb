@@ -1,4 +1,4 @@
-# contactually-ruby
+# contactually-rb
 
 [![Build Status](https://travis-ci.org/RealScout/contactually-ruby.svg?branch=master)](https://travis-ci.org/RealScout/contactually-ruby)
 [![Code Climate](https://codeclimate.com/github/RealScout/contactually-ruby/badges/gpa.svg)](https://codeclimate.com/github/RealScout/contactually-ruby)
