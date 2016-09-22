@@ -6,19 +6,7 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'contactually-api'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install contactually-api
+__NOTE__: Work in progress and not yet available as a gem
 
 ## Usage
 
@@ -34,3 +22,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/contactually-api. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+## Todos
+
+- Support update endpoints
+- Support Contact convenience endpoints (eg: /contacts/:id/notes)
+- Support Create, Destroy endpoints
+- Support other endpoints
