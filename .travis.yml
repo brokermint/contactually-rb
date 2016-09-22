@@ -2,5 +2,5 @@ sudo: false
 language: ruby
 rvm:
   - 2.3.1
-env: CODECLIMATE_REPO_TOKEN=62c8788d92c008d2cea41852c9e1e9605d0617d5eda9c77eac63c330ec19f9c2
+env: CODECLIMATE_REPO_TOKEN=9457072d7c7f1610175a27a9c1aa484dfc680e6b66cabc4dea96dba7658aa93c
 before_install: gem install bundler -v 1.12.5
