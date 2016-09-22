@@ -10,13 +10,25 @@ __NOTE__: This is a heavily work in progress codebase, and will most definitely 
 
 ## Installation
 
-__NOTE__: Work in progress and not yet available as a gem
+Gemfile
+
+```
+gem 'contactually-rb', '~> 0.1.0'
+```
+
+System
+
+```
+gem install contactually-rb
+```
 
 ## Usage
 
 Simple list contacts example,
 
 ```ruby
+require 'contactually'
+
 client = Contactually::Client.new(auth_token: '<auth_token>')
 #   or
 client = Contactually::Client.new(api_key: '<api_key>')

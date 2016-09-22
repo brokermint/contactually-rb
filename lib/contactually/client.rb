@@ -24,5 +24,9 @@ module Contactually
     def tags
       @tags ||= Contactually::Tags.new(interface: interface)
     end
+
+    def tasks
+      @tasks ||= Contactually::Tasks.new(interface: interface)
+    end
   end
 end

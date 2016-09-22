@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Contactually::Tags do
   describe '#model' do
-    it 'returns the Contact class' do
+    it 'returns the Tag class' do
       expect(described_class.new.model).to eq(Contactually::Models::Tag)
     end
   end
