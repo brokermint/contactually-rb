@@ -229,20 +229,20 @@ module MockResponses
           "addresses": [
             {
               "id": "ab0006d1-89d0-4991-854a-a9cb7957d091",
-              "full_address": "Corrineside",
+              "full_address": "480 Ellis St",
               "label": "Office",
-              "street_1": null,
-              "street_2": null,
-              "city": null,
-              "state": null,
-              "zip": null,
-              "country": null
+              "street_1": "street 1",
+              "street_2": "street 2",
+              "city": "Sunnyvale",
+              "state": "CA",
+              "zip": "94086",
+              "country": "USA"
             }
           ],
           "email_addresses": [
             {
               "id": "contact_identity_19",
-              "label": null,
+              "label": "Primary Email",
               "address": "wilford.wilderman@example.com"
             }
           ],
@@ -250,14 +250,14 @@ module MockResponses
             {
               "id": "30435661-5e2f-4886-871a-b2b99d0b3afb",
               "label": "LinkedIn",
-              "url": "http://frami.com"
+              "url": "http://google.com"
             }
           ],
           "websites": [
             {
               "id": "dc586325-d569-46c5-b19a-e7b7f8cfa80e",
               "label": "Business",
-              "address": "http://kovacekmuller.co.uk"
+              "address": "http://google.co.uk"
             }
           ],
           "phone_numbers": [

@@ -1,6 +1,12 @@
 module Contactually
   class Response
+    extend Forwardable
+
     attr_reader :model_type, :raw_response, :interface
+
+    def_delegator :raw_response, :body
+    def_delegator :raw_response, :headers
+    def_delegator :raw_response, :status
 
     def initialize(response, resource)
       @raw_response = response
@@ -21,15 +27,15 @@ module Contactually
     end
 
     def raw_data
-      raw_response.body.fetch(DATA_KEY, {})
+      body.fetch(DATA_KEY, {})
     end
 
     def errors
-      raw_response.body.fetch(ERROR_KEY, {})
+      body.fetch(ERROR_KEY, {})
     end
 
     def meta
-      raw_response.body.fetch(META_KEY, {})
+      body.fetch(META_KEY, {})
     end
 
     private

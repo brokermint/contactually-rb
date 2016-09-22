@@ -9,7 +9,7 @@ describe Contactually::Buckets do
 
   describe '.implements' do
     it 'implements list endpoint functionality' do
-      client = Contactually::Client.new
+      client = build_client
       stub_request(:get, 'https://api.contactually.com/v2/buckets').
         to_return(body: MockResponses::Buckets.list_response, headers: {'Content-Type' => 'application/json'})
 
@@ -17,10 +17,11 @@ describe Contactually::Buckets do
 
       expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Buckets.list_response))
       expect(response.data).to be_a(Contactually::Collection)
+      expect(response.data.first).to be_a(Contactually::Models::Bucket)
     end
 
     it 'implements fetch endpoint functionality' do
-      client = Contactually::Client.new
+      client = build_client
       stub_request(:get, 'https://api.contactually.com/v2/buckets/1').
         to_return(body: MockResponses::Buckets.fetch_response, headers: {'Content-Type' => 'application/json'})
 
