@@ -20,11 +20,11 @@ module Contactually
     end
 
     def has_next_page?
-      next_page.present?
+      !next_page.nil?
     end
 
     def has_previous_page?
-      previous_page.present?
+      !previous_page.nil?
     end
 
     def_delegator :items, :last

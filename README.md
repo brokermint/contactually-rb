@@ -13,7 +13,7 @@ __NOTE__: This is a heavily work in progress codebase, and will most definitely 
 Gemfile
 
 ```
-gem 'contactually-rb', '~> 0.1.0'
+gem 'contactually-rb', '~> 0.1.1'
 ```
 
 System
