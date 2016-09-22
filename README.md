@@ -1,8 +1,8 @@
 # contactually-rb
 
-[![Build Status](https://travis-ci.org/RealScout/contactually-ruby.svg?branch=master)](https://travis-ci.org/RealScout/contactually-ruby)
-[![Code Climate](https://codeclimate.com/github/RealScout/contactually-ruby/badges/gpa.svg)](https://codeclimate.com/github/RealScout/contactually-ruby)
-[![Test Coverage](https://codeclimate.com/github/RealScout/contactually-ruby/badges/coverage.svg)](https://codeclimate.com/github/RealScout/contactually-ruby)
+[![Build Status](https://travis-ci.org/RealScout/contactually-rb.svg?branch=master)](https://travis-ci.org/RealScout/contactually-rb)
+[![Code Climate](https://codeclimate.com/github/RealScout/contactually-rb/badges/gpa.svg)](https://codeclimate.com/github/RealScout/contactually-rb)
+[![Test Coverage](https://codeclimate.com/github/RealScout/contactually-rb/badges/coverage.svg)](https://codeclimate.com/github/RealScout/contactually-rb)
 
 A simple ruby wrapper around [Contactually v2 Api](https://developers.contactually.com/docs/v2/).
 
