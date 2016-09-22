@@ -26,9 +26,28 @@ module Contactually
       @adapter = Faraday.default_adapter
     end
   end
+
+  class Error < StandardError
+    attr_reader :messages
+
+    def initialize(messages)
+      @messages = messages
+      super(messages.join(','))
+    end
+  end
+
+  class ForbiddenError < Error
+  end
+
+  class NotFoundError < Error
+  end
+
+  class UnauthorizedError < Error
+  end
 end
 
 require 'contactually/models/model'
+require 'contactually/middleware/error_middleware'
 
 require 'contactually/models/address'
 require 'contactually/models/bucket'

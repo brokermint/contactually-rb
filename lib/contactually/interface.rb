@@ -19,6 +19,7 @@ module Contactually
       @connection ||= Faraday.new do |conn|
         conn.adapter  @adapter
         conn.response :json, :content_type => /\bjson$/
+        conn.use Contactually::Middleware::ErrorHandler
 
         conn.headers['Content-type']  = 'application/json',
         conn.headers['Authorization'] = "Bearer #{token}"

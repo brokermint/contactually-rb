@@ -48,7 +48,7 @@ describe Contactually::Client do
   end
 
   describe '#tags' do
-    it 'returns a buckets instance' do
+    it 'returns a tag instance' do
       client = build_client
 
       tags = client.tags
@@ -63,6 +63,25 @@ describe Contactually::Client do
       second_tags = client.tags
 
       expect(tags).to eq(second_tags)
+    end
+  end
+
+  describe '#tasks' do
+    it 'returns a task instance' do
+      client = build_client
+
+      tasks = client.tasks
+
+      expect(tasks).to be_a(Contactually::Tasks)
+    end
+
+    it 'memoizes the returned instance' do
+      client = build_client
+
+      tasks = client.tasks
+      second_tasks = client.tasks
+
+      expect(tasks).to eq(second_tasks)
     end
   end
 end
