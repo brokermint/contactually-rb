@@ -1,4 +1,6 @@
+require 'date'
 require 'forwardable'
+
 require 'faraday'
 require 'faraday_middleware'
 
