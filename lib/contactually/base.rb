@@ -40,7 +40,7 @@ module Contactually
 
     def fetch(id, params = {})
       check_implementation(:fetch)
-      Response.new(interface.get(url + "/" + id.to_s, params), self)
+      Response.new(interface.get(build_fetch_url(id), params), self)
     end
 
     def update
@@ -60,6 +60,14 @@ module Contactually
     end
 
     private
+
+    def build_fetch_url(id = nil)
+      if id
+        url + "/" + id.to_s
+      else
+        url
+      end
+    end
 
     def list_in_batches(params)
       collection = Response.new(interface.get(url, params), self).data

@@ -84,4 +84,23 @@ describe Contactually::Client do
       expect(tasks).to eq(second_tasks)
     end
   end
+
+  describe '#me' do
+    it 'returns a user instance' do
+      client = build_client
+
+      tasks = client.me
+
+      expect(tasks).to be_a(Contactually::Me)
+    end
+
+    it 'memoizes the returned instance' do
+      client = build_client
+
+      user = client.me
+      second_user = client.me
+
+      expect(user).to eq(second_user)
+    end
+  end
 end
