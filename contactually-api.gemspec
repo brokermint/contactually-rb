@@ -4,8 +4,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'contactually/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "contactually-api"
-  spec.version       = Contactually::Api::VERSION
+  spec.name          = "contactually-ruby"
+  spec.version       = Contactually::VERSION
   spec.authors       = ["Nick Blumenthal", "Nic Cavigliano"]
   spec.email         = ["nick@realscout.com", "ncavig@gmail.com"]
 
