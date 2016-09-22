@@ -4,3 +4,7 @@ rvm:
   - 2.3.1
 env: CODECLIMATE_REPO_TOKEN=9457072d7c7f1610175a27a9c1aa484dfc680e6b66cabc4dea96dba7658aa93c
 before_install: gem install bundler -v 1.12.5
+notifications:
+  slack:
+    rooms:
+      - realscout:fuqLTtjaXVdGsbtQWrnRbK0G#tech-notifications
