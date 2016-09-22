@@ -1,10 +1,10 @@
-# Contactually::Api
+# contactually-ruby
 
 [![Build Status](https://travis-ci.org/RealScout/contactually-ruby.svg?branch=master)](https://travis-ci.org/RealScout/contactually-ruby)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/contactually/api`. To experiment with that code, run `bin/console` for an interactive prompt.
+A simple ruby wrapper around [Contactually v2 Api](https://developers.contactually.com/docs/v2/).
 
-TODO: Delete this and the text above, and describe your gem
+__NOTE__: This is a heavily work in progress codebase, and will most definitely have breaking changes as things progress.
 
 ## Installation
 
@@ -12,7 +12,37 @@ __NOTE__: Work in progress and not yet available as a gem
 
 ## Usage
 
-TODO: Write usage instructions here
+Simple list contacts example,
+
+```ruby
+client = Contactually::Client.new(auth_token: '<auth_token>')
+#   or
+client = Contactually::Client.new(api_key: '<api_key>')
+
+response = client.contacts.list
+# => #<Contactually::Response>
+
+response.data
+# => #<Contactually::Collection>
+
+response.data.total # => 73
+response.raw_response # => #<Faraday::Response>
+
+data = response.data
+contact = data.first # => #<Contactually::Models::Contact>
+contact.first_name # => "Nic"
+
+```
+
+Loop through all contacts (it will yield contact and transparently loop through all contacts in batches of 50 using Contacutally pagination),
+
+```ruby
+client = Contactually::Client.new(auth_token: '<auth_token>')
+
+client.contacts.list_each do |contact|
+  # do something with contact
+end
+```
 
 ## Development
 
