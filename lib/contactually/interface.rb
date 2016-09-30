@@ -7,8 +7,6 @@ module Contactually
       @api_key = api_key
       @adapter = Contactually.configuration.adapter || :net_http
       @base_url = base_url
-
-      set_headers
     end
 
     def get(url, params)
@@ -38,13 +36,6 @@ module Contactually
 
     def token
       auth_token || api_key
-    end
-
-    def set_headers
-      @headers = {
-        'Content-type' => 'application/json',
-        'Authorization' => "Bearer #{token}"
-      }
     end
   end
 end

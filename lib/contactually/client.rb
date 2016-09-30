@@ -22,7 +22,7 @@ module Contactually
     end
 
     def me
-      @contacts ||= Contactually::Me.new(interface: interface)
+      @me ||= Contactually::Me.new(interface: interface)
     end
 
     def tags
