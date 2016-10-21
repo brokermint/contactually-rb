@@ -108,5 +108,9 @@ module MockResponses
     def self.fetch_data
       MockResponses.parsed_data(fetch_response)
     end
+
+    def self.update_response
+      self.fetch_response
+    end
   end
 end

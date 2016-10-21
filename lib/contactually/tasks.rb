@@ -1,6 +1,6 @@
 module Contactually
   class Tasks < Base
-    implements :list, :fetch
+    implements :fetch, :update
 
     def initialize(url: '/v2/tasks', interface: nil)
       @url = url

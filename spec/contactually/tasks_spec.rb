@@ -18,5 +18,16 @@ describe Contactually::Tasks do
       expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Tasks.fetch_response))
       expect(response.data).to be_a(Contactually::Models::Task)
     end
+
+    it 'implements update endpoint functionality' do
+      client = build_client
+      stub_request(:patch, 'https://api.contactually.com/v2/tasks/task_31').
+        to_return(body: MockResponses::Tasks.update_response, headers: {'Content-Type' => 'application/json'})
+
+      response = client.tasks.update('task_31', {data: {title: 'test'}}.to_json)
+
+      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Tasks.update_response))
+      expect(response.data).to be_a(Contactually::Models::Task)
+    end
   end
 end
