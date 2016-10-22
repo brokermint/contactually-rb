@@ -41,7 +41,12 @@ module Contactually
           when :integer then value.to_i
           when :float then value.to_f
           when :date then value.to_date
-          when :boolean then !!value
+          when :boolean
+            if !!value == value
+              value
+            else
+              raise Contactually::TypeMismatchError.new(["Expected a boolean but got #{value.class}"])
+            end
           when :datetime then DateTime.parse(value)
           else
             case type

@@ -44,6 +44,9 @@ module Contactually
 
   class UnauthorizedError < Error
   end
+
+  class TypeMismatchError < Error
+  end
 end
 
 require 'contactually/models/model'
