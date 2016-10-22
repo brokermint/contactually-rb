@@ -1,6 +1,6 @@
 module Contactually
   class Interactions < Base
-    implements :fetch, :update
+    implements :create, :fetch, :update
 
     def initialize(url: '/v2/interactions', interface: nil)
       @url = url

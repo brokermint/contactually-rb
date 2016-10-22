@@ -1,5 +1,9 @@
 module MockResponses
   module Buckets
+    def self.create_response
+      self.fetch_response
+    end
+
     def self.list_response
       <<-JSON
       {

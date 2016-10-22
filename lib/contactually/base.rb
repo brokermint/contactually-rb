@@ -34,8 +34,9 @@ module Contactually
       end
     end
 
-    def create
+    def create(body)
       check_implementation(:create)
+      Response.new(interface.post(build_fetch_url, body), self)
     end
 
     def fetch(id, params = {})

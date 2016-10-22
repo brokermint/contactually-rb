@@ -1,6 +1,6 @@
 module Contactually
   class Contacts < Base
-    implements :list, :fetch, :update
+    implements :create, :list, :fetch, :update
 
     def initialize(url: '/v2/contacts', interface: nil)
       @url = url

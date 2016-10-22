@@ -1,5 +1,9 @@
 module MockResponses
   module Tasks
+    def self.create_response
+      self.fetch_response
+    end
+
     def self.fetch_response
       <<-JSON
       {

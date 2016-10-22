@@ -8,6 +8,17 @@ describe Contactually::Interactions do
   end
 
   describe '.implements' do
+    it 'implements create endpoint functionality' do
+      client = build_client
+      stub_request(:post, 'https://api.contactually.com/v2/interactions').
+        to_return(body: MockResponses::Interactions.create_response, headers: {'Content-Type' => 'application/json'})
+
+      response = client.interactions.create({data: {subject: 'test'}}.to_json)
+
+      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Interactions.create_response))
+      expect(response.data).to be_a(Contactually::Models::Interaction)
+    end
+
     it 'implements fetch endpoint functionality' do
       client = build_client
       stub_request(:get, 'https://api.contactually.com/v2/interactions/interaction_1').

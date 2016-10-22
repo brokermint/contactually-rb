@@ -8,6 +8,17 @@ describe Contactually::Contacts do
   end
 
   describe '.implements' do
+    it 'implements create endpoint functionality' do
+      client = build_client
+      stub_request(:post, 'https://api.contactually.com/v2/contacts').
+        to_return(body: MockResponses::Contacts.create_response, headers: {'Content-Type' => 'application/json'})
+
+      response = client.contacts.create({data: {first_name: 'test'}}.to_json)
+
+      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Contacts.create_response))
+      expect(response.data).to be_a(Contactually::Models::Contact)
+    end
+
     it 'implements list endpoint functionality' do
       client = build_client
       stub_request(:get, 'https://api.contactually.com/v2/contacts').
