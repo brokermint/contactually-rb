@@ -13,6 +13,14 @@ module Contactually
       connection.get(build_full_url(url), params)
     end
 
+    def patch(url, body)
+      connection.patch(build_full_url(url), body)
+    end
+
+    def post(url, body)
+      connection.post(build_full_url(url), body)
+    end
+
     def connection
       @connection ||= Faraday.new do |conn|
         conn.adapter  @adapter

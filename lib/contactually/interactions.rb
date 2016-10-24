@@ -1,14 +1,14 @@
 module Contactually
-  class Tasks < Base
+  class Interactions < Base
     implements :create, :fetch, :update
 
-    def initialize(url: '/v2/tasks', interface: nil)
+    def initialize(url: '/v2/interactions', interface: nil)
       @url = url
       @interface = interface
     end
 
     def model
-      Models::Task
+      Models::Interaction
     end
   end
 end

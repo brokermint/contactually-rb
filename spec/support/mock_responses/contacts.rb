@@ -1,5 +1,9 @@
 module MockResponses
   module Contacts
+    def self.create_response
+      self.fetch_response
+    end
+
     def self.list_response
       <<-JSON
       {
@@ -290,6 +294,10 @@ module MockResponses
         "meta": {}
       }
       JSON
+    end
+
+    def self.update_response
+      self.fetch_response
     end
 
     def self.fetch_data

@@ -21,6 +21,10 @@ module Contactually
       @contacts ||= Contactually::Contacts.new(interface: interface)
     end
 
+    def interactions
+      @interactions ||= Contactually::Interactions.new(interface: interface)
+    end
+
     def me
       @me ||= Contactually::Me.new(interface: interface)
     end

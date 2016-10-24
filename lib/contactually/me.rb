@@ -1,6 +1,6 @@
 module Contactually
   class Me < Base
-    implements :fetch
+    implements :fetch, :update
 
     def initialize(url: '/v2/me', interface: nil)
       @url = url
@@ -9,6 +9,10 @@ module Contactually
 
     def fetch
       super(nil)
+    end
+
+    def update(body)
+      super(nil, body)
     end
 
     def model

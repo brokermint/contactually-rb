@@ -34,8 +34,9 @@ module Contactually
       end
     end
 
-    def create
+    def create(body)
       check_implementation(:create)
+      Response.new(interface.post(build_fetch_url, body), self)
     end
 
     def fetch(id, params = {})
@@ -43,8 +44,9 @@ module Contactually
       Response.new(interface.get(build_fetch_url(id), params), self)
     end
 
-    def update
+    def update(id, body)
       check_implementation(:update)
+      Response.new(interface.patch(build_fetch_url(id), body), self)
     end
 
     def delete
