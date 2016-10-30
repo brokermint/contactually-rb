@@ -13,10 +13,10 @@ describe Contactually::Buckets do
       stub_request(:post, 'https://api.contactually.com/v2/buckets').
         to_return(body: MockResponses::Buckets.create_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.buckets.create({data: {name: 'test'}}.to_json)
+      bucket = client.buckets.create({data: {name: 'test'}}.to_json)
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Buckets.fetch_response))
-      expect(response.data).to be_a(Contactually::Models::Bucket)
+      expect(client.buckets.response.body).to eq(JSON.parse(MockResponses::Buckets.fetch_response))
+      expect(bucket).to be_a(Contactually::Models::Bucket)
     end
 
     it 'implements list endpoint functionality' do
@@ -24,11 +24,11 @@ describe Contactually::Buckets do
       stub_request(:get, 'https://api.contactually.com/v2/buckets').
         to_return(body: MockResponses::Buckets.list_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.buckets.list
+      buckets = client.buckets.list
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Buckets.list_response))
-      expect(response.data).to be_a(Contactually::Collection)
-      expect(response.data.first).to be_a(Contactually::Models::Bucket)
+      expect(client.buckets.response.body).to eq(JSON.parse(MockResponses::Buckets.list_response))
+      expect(buckets).to be_a(Contactually::Collection)
+      expect(buckets.first).to be_a(Contactually::Models::Bucket)
     end
 
     it 'implements fetch endpoint functionality' do
@@ -36,10 +36,10 @@ describe Contactually::Buckets do
       stub_request(:get, 'https://api.contactually.com/v2/buckets/1').
         to_return(body: MockResponses::Buckets.fetch_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.buckets.fetch(1)
+      bucket = client.buckets.fetch(1)
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Buckets.fetch_response))
-      expect(response.data).to be_a(Contactually::Models::Bucket)
+      expect(client.buckets.response.body).to eq(JSON.parse(MockResponses::Buckets.fetch_response))
+      expect(bucket).to be_a(Contactually::Models::Bucket)
     end
 
     it 'implements update endpoint functionality' do
@@ -47,10 +47,10 @@ describe Contactually::Buckets do
       stub_request(:patch, 'https://api.contactually.com/v2/buckets/1').
         to_return(body: MockResponses::Buckets.update_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.buckets.update(1, {data: {name: 'test'}}.to_json)
+      bucket = client.buckets.update(1, {data: {name: 'test'}}.to_json)
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Buckets.update_response))
-      expect(response.data).to be_a(Contactually::Models::Bucket)
+      expect(client.buckets.response.body).to eq(JSON.parse(MockResponses::Buckets.update_response))
+      expect(bucket).to be_a(Contactually::Models::Bucket)
     end
   end
 end

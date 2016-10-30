@@ -1,6 +1,6 @@
 module Contactually
   class Base
-    attr_reader :url, :interface
+    attr_reader :url, :interface, :response
 
     def self.implements(*method_list)
       @implements = method_list
@@ -17,7 +17,7 @@ module Contactually
 
     def list(params = {})
       check_implementation(:list)
-      Response.new(interface.get(url, params), self)
+      wrap_response(interface.get(url, params)).data
     end
 
     def list_each(params = {}, &block)
@@ -36,17 +36,17 @@ module Contactually
 
     def create(body)
       check_implementation(:create)
-      Response.new(interface.post(build_fetch_url, body), self)
+      wrap_response(interface.post(build_fetch_url, body)).data
     end
 
     def fetch(id, params = {})
       check_implementation(:fetch)
-      Response.new(interface.get(build_fetch_url(id), params), self)
+      wrap_response(interface.get(build_fetch_url(id), params)).data
     end
 
     def update(id, body)
       check_implementation(:update)
-      Response.new(interface.patch(build_fetch_url(id), body), self)
+      wrap_response(interface.patch(build_fetch_url(id), body)).data
     end
 
     def delete
@@ -72,7 +72,7 @@ module Contactually
     end
 
     def list_in_batches(params)
-      collection = Response.new(interface.get(url, params), self).data
+      collection = wrap_response(interface.get(url, params)).data
       return unless collection.total > 0
 
       while collection.items.any?
@@ -83,8 +83,12 @@ module Contactually
         url = collection.next_page
         _old_page = params.delete(:page)
 
-        collection = Response.new(interface.get(url, params), self).data
+        collection = wrap_response(interface.get(url, params)).data
       end
+    end
+
+    def wrap_response(raw_response)
+      @response = Response.new(raw_response, self)
     end
   end
 end

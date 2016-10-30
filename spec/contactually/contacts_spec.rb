@@ -13,10 +13,10 @@ describe Contactually::Contacts do
       stub_request(:post, 'https://api.contactually.com/v2/contacts').
         to_return(body: MockResponses::Contacts.create_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.contacts.create({data: {first_name: 'test'}}.to_json)
+      contact = client.contacts.create({data: {first_name: 'test'}}.to_json)
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Contacts.create_response))
-      expect(response.data).to be_a(Contactually::Models::Contact)
+      expect(client.contacts.response.body).to eq(JSON.parse(MockResponses::Contacts.create_response))
+      expect(contact).to be_a(Contactually::Models::Contact)
     end
 
     it 'implements list endpoint functionality' do
@@ -24,11 +24,11 @@ describe Contactually::Contacts do
       stub_request(:get, 'https://api.contactually.com/v2/contacts').
           to_return(body: MockResponses::Contacts.list_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.contacts.list
+      contacts = client.contacts.list
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Contacts.list_response))
-      expect(response.data).to be_a(Contactually::Collection)
-      expect(response.data.first).to be_a(Contactually::Models::Contact)
+      expect(client.contacts.response.body).to eq(JSON.parse(MockResponses::Contacts.list_response))
+      expect(contacts).to be_a(Contactually::Collection)
+      expect(contacts.first).to be_a(Contactually::Models::Contact)
     end
 
     it 'implements fetch endpoint functionality' do
@@ -36,10 +36,10 @@ describe Contactually::Contacts do
       stub_request(:get, 'https://api.contactually.com/v2/contacts/contact_1').
           to_return(body: MockResponses::Contacts.fetch_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.contacts.fetch('contact_1')
+      contact = client.contacts.fetch('contact_1')
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Contacts.fetch_response))
-      expect(response.data).to be_a(Contactually::Models::Contact)
+      expect(client.contacts.response.body).to eq(JSON.parse(MockResponses::Contacts.fetch_response))
+      expect(contact).to be_a(Contactually::Models::Contact)
     end
 
     it 'implements update endpoint functionality' do
@@ -47,10 +47,10 @@ describe Contactually::Contacts do
       stub_request(:patch, 'https://api.contactually.com/v2/contacts/contact_1').
         to_return(body: MockResponses::Contacts.update_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.contacts.update('contact_1', {})
+      contact = client.contacts.update('contact_1', {})
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Contacts.update_response))
-      expect(response.data).to be_a(Contactually::Models::Contact)
+      expect(client.contacts.response.body).to eq(JSON.parse(MockResponses::Contacts.update_response))
+      expect(contact).to be_a(Contactually::Models::Contact)
     end
   end
 end
