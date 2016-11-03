@@ -24,7 +24,9 @@ gem install contactually-rb
 
 ## Usage
 
-Simple list contacts example,
+### Simple list contacts example
+
+Create a client instance
 
 ```ruby
 require 'contactually'
@@ -32,45 +34,60 @@ require 'contactually'
 client = Contactually::Client.new(auth_token: '<auth_token>')
 #   or
 client = Contactually::Client.new(api_key: '<api_key>')
-
-response = client.contacts.list
-# => #<Contactually::Response>
-
-response.data
-# => #<Contactually::Collection>
-
-response.data.total # => 73
-response.raw_response # => #<Faraday::Response>
-
-data = response.data
-contact = data.first # => #<Contactually::Models::Contact>
-contact.first_name # => "Nic"
-
 ```
 
-Loop through all contacts (it will yield contact and transparently loop through all contacts in batches of 50 using Contacutally pagination),
+```ruby
+# List contacts
+contacts = client.contacts.list
+# => #<Contactually::Collection>
+
+# Access to response wrapper
+client.contacts.response
+# => #<Contactually::Response>
+
+# Raw farday response
+client.contacts.response.raw_response
+# => #<Faraday::Response>
+
+contacts.total # => 73 Total contact count
+contacts.size # => 50 Total contacts in current list
+
+contact = contacts.first # => #<Contactually::Models::Contact>
+contact.first_name # => "Nic"
+```
+
+Looping through all contacts (it will yield contact and transparently loop through all contacts in batches of 50 using Contacutally pagination),
 
 ```ruby
 client = Contactually::Client.new(auth_token: '<auth_token>')
 
 client.contacts.list_each do |contact|
-  # do something with contact
+  # do something with contact, 50 per batch as specified by Contactually API
 end
+```
+
+### Searching
+
+```ruby
+collection = client.contacts.list({q: 'Nic'})
+collection.first.name # => Nic
 ```
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/contactually-api. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/RealScout/contactually-api. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## Todos
 
-- Support update endpoints
+- ~~Support update endpoints~~
 - Support Contact convenience endpoints (eg: /contacts/:id/notes)
-- Support Create, Destroy endpoints
+- Support ~~Create~~, Destroy endpoints
 - Support other endpoints
+- Better client testing support (`Contactually.configuration.test_mode = true`)
+- Documentation
