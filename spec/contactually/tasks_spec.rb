@@ -13,10 +13,10 @@ describe Contactually::Tasks do
       stub_request(:post, 'https://api.contactually.com/v2/tasks').
         to_return(body: MockResponses::Tasks.create_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.tasks.create({data: {title: 'test'}}.to_json)
+      task = client.tasks.create({data: {title: 'test'}}.to_json)
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Tasks.create_response))
-      expect(response.data).to be_a(Contactually::Models::Task)
+      expect(client.tasks.response.body).to eq(JSON.parse(MockResponses::Tasks.create_response))
+      expect(task).to be_a(Contactually::Models::Task)
     end
 
     it 'implements fetch endpoint functionality' do
@@ -24,10 +24,10 @@ describe Contactually::Tasks do
       stub_request(:get, 'https://api.contactually.com/v2/tasks/task_31').
         to_return(body: MockResponses::Tasks.fetch_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.tasks.fetch('task_31')
+      task = client.tasks.fetch('task_31')
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Tasks.fetch_response))
-      expect(response.data).to be_a(Contactually::Models::Task)
+      expect(client.tasks.response.body).to eq(JSON.parse(MockResponses::Tasks.fetch_response))
+      expect(task).to be_a(Contactually::Models::Task)
     end
 
     it 'implements update endpoint functionality' do
@@ -35,10 +35,10 @@ describe Contactually::Tasks do
       stub_request(:patch, 'https://api.contactually.com/v2/tasks/task_31').
         to_return(body: MockResponses::Tasks.update_response, headers: {'Content-Type' => 'application/json'})
 
-      response = client.tasks.update('task_31', {data: {title: 'test'}}.to_json)
+      task = client.tasks.update('task_31', {data: {title: 'test'}}.to_json)
 
-      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Tasks.update_response))
-      expect(response.data).to be_a(Contactually::Models::Task)
+      expect(client.tasks.response.body).to eq(JSON.parse(MockResponses::Tasks.update_response))
+      expect(task).to be_a(Contactually::Models::Task)
     end
   end
 end
