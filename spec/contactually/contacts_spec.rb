@@ -52,5 +52,15 @@ describe Contactually::Contacts do
       expect(client.contacts.response.body).to eq(JSON.parse(MockResponses::Contacts.update_response))
       expect(contact).to be_a(Contactually::Models::Contact)
     end
+
+    it 'implements delete endpoint functionality' do
+      client = build_client
+      stub_request(:delete, 'https://api.contactually.com/v2/contacts/contact_1').
+         to_return(body: MockResponses::Contacts.fetch_response, headers: {'Content-Type' => 'application/json'})
+
+      client.contacts.destroy('contact_1')
+
+      expect(client.contacts.response.status).to eq(200)
+    end
   end
 end

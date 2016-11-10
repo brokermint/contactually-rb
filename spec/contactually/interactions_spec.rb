@@ -40,5 +40,15 @@ describe Contactually::Interactions do
       expect(client.interactions.response.body).to eq(JSON.parse(MockResponses::Interactions.update_response))
       expect(interaction).to be_a(Contactually::Models::Interaction)
     end
+
+    it 'implements delete endpoint functionality' do
+      client = build_client
+      stub_request(:delete, 'https://api.contactually.com/v2/interactions/interaction_1').
+          to_return(body: MockResponses::Interactions.fetch_response, headers: {'Content-Type' => 'application/json'})
+
+      client.interactions.destroy('interaction_1')
+
+      expect(client.interactions.response.status).to eq(200)
+    end
   end
 end
