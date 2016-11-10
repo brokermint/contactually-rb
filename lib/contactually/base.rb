@@ -49,8 +49,9 @@ module Contactually
       wrap_response(interface.patch(build_fetch_url(id), body)).data
     end
 
-    def delete
-      check_implementation(:delete)
+    def destroy(id)
+      check_implementation(:destroy)
+      wrap_response(interface.destroy(build_fetch_url(id))).data
     end
 
     def check_implementation(method)

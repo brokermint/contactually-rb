@@ -21,6 +21,10 @@ module Contactually
       connection.post(build_full_url(url), body)
     end
 
+    def destroy(url)
+      connection.delete(build_full_url(url))
+    end
+
     def connection
       @connection ||= Faraday.new do |conn|
         conn.adapter  @adapter

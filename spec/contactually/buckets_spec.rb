@@ -52,5 +52,15 @@ describe Contactually::Buckets do
       expect(client.buckets.response.body).to eq(JSON.parse(MockResponses::Buckets.update_response))
       expect(bucket).to be_a(Contactually::Models::Bucket)
     end
+
+    it 'implements delete endpoint functionality' do
+      client = build_client
+      stub_request(:delete, 'https://api.contactually.com/v2/buckets/1').
+          to_return(body: MockResponses::Buckets.fetch_response, headers: {'Content-Type' => 'application/json'})
+
+      client.buckets.destroy('1')
+
+      expect(client.buckets.response.status).to eq(200)
+    end
   end
 end

@@ -1,6 +1,6 @@
 module Contactually
   class Buckets < Base
-    implements :create, :fetch, :list, :update
+    implements :create, :fetch, :list, :update, :destroy
 
     def initialize(url: '/v2/buckets', interface: nil)
       @url = url

@@ -40,5 +40,15 @@ describe Contactually::Tasks do
       expect(client.tasks.response.body).to eq(JSON.parse(MockResponses::Tasks.update_response))
       expect(task).to be_a(Contactually::Models::Task)
     end
+
+    it 'implements delete endpoint functionality' do
+      client = build_client
+      stub_request(:delete, 'https://api.contactually.com/v2/tasks/task_31').
+        to_return(body: MockResponses::Tasks.fetch_response, headers: {'Content-Type' => 'application/json'})
+
+      client.tasks.destroy('task_31')
+
+      expect(client.tasks.response.status).to eq(200)
+    end
   end
 end
