@@ -87,7 +87,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/RealSc
 
 - ~~Support update endpoints~~
 - Support Contact convenience endpoints (eg: /contacts/:id/notes)
-- Support ~~Create~~, Destroy endpoints
+- ~~Support Create, Destroy endpoints~~
 - Support other endpoints
 - Better client testing support (`Contactually.configuration.test_mode = true`)
 - Documentation
