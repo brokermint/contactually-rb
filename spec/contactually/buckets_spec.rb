@@ -11,9 +11,10 @@ describe Contactually::Buckets do
     it 'implements create endpoint functionality' do
       client = build_client
       stub_request(:post, 'https://api.contactually.com/v2/buckets').
+        with(body: {data: {name: 'test'}}).
         to_return(body: MockResponses::Buckets.create_response, headers: {'Content-Type' => 'application/json'})
 
-      bucket = client.buckets.create({data: {name: 'test'}}.to_json)
+      bucket = client.buckets.create({data: {name: 'test'}})
 
       expect(client.buckets.response.body).to eq(JSON.parse(MockResponses::Buckets.fetch_response))
       expect(bucket).to be_a(Contactually::Models::Bucket)
@@ -45,9 +46,10 @@ describe Contactually::Buckets do
     it 'implements update endpoint functionality' do
       client = build_client
       stub_request(:patch, 'https://api.contactually.com/v2/buckets/1').
+        with(body: {data: {name: 'test'}}).
         to_return(body: MockResponses::Buckets.update_response, headers: {'Content-Type' => 'application/json'})
 
-      bucket = client.buckets.update(1, {data: {name: 'test'}}.to_json)
+      bucket = client.buckets.update(1, {data: {name: 'test'}})
 
       expect(client.buckets.response.body).to eq(JSON.parse(MockResponses::Buckets.update_response))
       expect(bucket).to be_a(Contactually::Models::Bucket)
