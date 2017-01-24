@@ -24,7 +24,7 @@ describe Contactually::Me do
       stub_request(:patch, 'https://api.contactually.com/v2/me').
         to_return(body: MockResponses::Users.fetch_response, headers: {'Content-Type' => 'application/json'})
 
-      user = client.me.update({data: {first_name: 'hi'}}.to_json)
+      user = client.me.update({data: {first_name: 'hi'}})
 
       expect(client.me.response.body).to eq(JSON.parse(MockResponses::Users.update_response))
       expect(user).to be_a(Contactually::Models::User)

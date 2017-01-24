@@ -13,7 +13,7 @@ describe Contactually::Tasks do
       stub_request(:post, 'https://api.contactually.com/v2/tasks').
         to_return(body: MockResponses::Tasks.create_response, headers: {'Content-Type' => 'application/json'})
 
-      task = client.tasks.create({data: {title: 'test'}}.to_json)
+      task = client.tasks.create({data: {title: 'test'}})
 
       expect(client.tasks.response.body).to eq(JSON.parse(MockResponses::Tasks.create_response))
       expect(task).to be_a(Contactually::Models::Task)
@@ -35,7 +35,7 @@ describe Contactually::Tasks do
       stub_request(:patch, 'https://api.contactually.com/v2/tasks/task_31').
         to_return(body: MockResponses::Tasks.update_response, headers: {'Content-Type' => 'application/json'})
 
-      task = client.tasks.update('task_31', {data: {title: 'test'}}.to_json)
+      task = client.tasks.update('task_31', {data: {title: 'test'}})
 
       expect(client.tasks.response.body).to eq(JSON.parse(MockResponses::Tasks.update_response))
       expect(task).to be_a(Contactually::Models::Task)

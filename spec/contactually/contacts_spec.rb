@@ -13,7 +13,7 @@ describe Contactually::Contacts do
       stub_request(:post, 'https://api.contactually.com/v2/contacts').
         to_return(body: MockResponses::Contacts.create_response, headers: {'Content-Type' => 'application/json'})
 
-      contact = client.contacts.create({data: {first_name: 'test'}}.to_json)
+      contact = client.contacts.create({data: {first_name: 'test'}})
 
       expect(client.contacts.response.body).to eq(JSON.parse(MockResponses::Contacts.create_response))
       expect(contact).to be_a(Contactually::Models::Contact)

@@ -13,7 +13,7 @@ describe Contactually::Interactions do
       stub_request(:post, 'https://api.contactually.com/v2/interactions').
         to_return(body: MockResponses::Interactions.create_response, headers: {'Content-Type' => 'application/json'})
 
-      interaction = client.interactions.create({data: {subject: 'test'}}.to_json)
+      interaction = client.interactions.create({data: {subject: 'test'}})
 
       expect(client.interactions.response.body).to eq(JSON.parse(MockResponses::Interactions.create_response))
       expect(interaction).to be_a(Contactually::Models::Interaction)
