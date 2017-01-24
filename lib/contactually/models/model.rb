@@ -31,6 +31,14 @@ module Contactually
         end
       end
 
+      def inspect
+        inspection = attributes.map {|name, value|
+          "#{name}: #{value.inspect}"
+        }.join(", ")
+
+        "#<#{self.class} #{inspection}>"
+      end
+
       private
 
       attr_reader :_extra_attributes
