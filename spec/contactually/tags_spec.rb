@@ -13,11 +13,11 @@ describe Contactually::Tags do
       stub_request(:get, 'https://api.contactually.com/v2/tags').
           to_return(body: MockResponses::Tags.list_response, headers: {'Content-Type' => 'application/json'})
 
-      tags = client.tags.list
+      response = client.tags.list
 
-      expect(client.tags.response.body).to eq(JSON.parse(MockResponses::Tags.list_response))
-      expect(tags).to be_a(Contactually::Collection)
-      expect(tags.first).to be_a(Contactually::Models::Tag)
+      expect(response.raw_response.body).to eq(JSON.parse(MockResponses::Tags.list_response))
+      expect(response.data).to be_a(Contactually::Collection)
+      expect(response.data.first).to be_a(Contactually::Models::Tag)
     end
   end
 end

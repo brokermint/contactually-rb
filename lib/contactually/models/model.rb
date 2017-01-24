@@ -6,13 +6,11 @@ module Contactually
       end
 
       def initialize(params={})
-        options = params.dup
+        params.each do |attr, _value|
+          self.send("#{attr}=", params.delete(attr)) if respond_to?(attr)
+        end if params
 
-        options.each do |attr, _value|
-          self.send("#{attr}=", options.delete(attr)) if respond_to?(attr)
-        end if options
-
-        @_extra_attributes = options
+        @_extra_attributes = params
 
         super()
       end

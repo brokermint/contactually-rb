@@ -1,6 +1,6 @@
 module Contactually
   class Base
-    attr_reader :url, :interface, :response
+    attr_reader :url, :interface
 
     def self.implements(*method_list)
       @implements = method_list
@@ -17,7 +17,7 @@ module Contactually
 
     def list(params = {})
       check_implementation(:list)
-      wrap_response(interface.get(url, params)).data
+      Response.new(interface.get(url, params), self)
     end
 
     def list_each(params = {}, &block)
@@ -36,22 +36,22 @@ module Contactually
 
     def create(body)
       check_implementation(:create)
-      wrap_response(interface.post(build_fetch_url, body)).data
+      Response.new(interface.post(build_fetch_url, body), self)
     end
 
     def fetch(id, params = {})
       check_implementation(:fetch)
-      wrap_response(interface.get(build_fetch_url(id), params)).data
+      Response.new(interface.get(build_fetch_url(id), params), self)
     end
 
     def update(id, body)
       check_implementation(:update)
-      wrap_response(interface.patch(build_fetch_url(id), body)).data
+      Response.new(interface.patch(build_fetch_url(id), body), self)
     end
 
     def destroy(id)
       check_implementation(:destroy)
-      wrap_response(interface.destroy(build_fetch_url(id))).data
+      interface.destroy(build_fetch_url(id))
     end
 
     def check_implementation(method)
@@ -73,7 +73,7 @@ module Contactually
     end
 
     def list_in_batches(params)
-      collection = wrap_response(interface.get(url, params)).data
+      collection = Response.new(interface.get(url, params), self).data
       return unless collection.total > 0
 
       while collection.items.any?
@@ -84,12 +84,8 @@ module Contactually
         url = collection.next_page
         _old_page = params.delete(:page)
 
-        collection = wrap_response(interface.get(url, params)).data
+        collection = Response.new(interface.get(url, params), self).data
       end
-    end
-
-    def wrap_response(raw_response)
-      @response = Response.new(raw_response, self)
     end
   end
 end
