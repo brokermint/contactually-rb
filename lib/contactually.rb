@@ -42,6 +42,9 @@ module Contactually
   class NotFoundError < Error
   end
 
+  class PaymentRequiredError < Error
+  end
+
   class UnauthorizedError < Error
   end
 

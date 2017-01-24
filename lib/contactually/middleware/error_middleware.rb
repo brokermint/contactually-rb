@@ -7,6 +7,9 @@ module Contactually
             when 401
               # Missing or invalid auth token
               raise Contactually::UnauthorizedError.new(error_messages(env.response))
+            when 402
+              # Auth token could be invalid due to non-payment
+              raise Contactually::PaymentRequiredError.new(error_messages(env.response))
             when 403
               # App does not have permission to perform the operation
               raise Contactually::ForbiddenError.new(error_messages(env.response))
@@ -25,7 +28,13 @@ module Contactually
         body = parse_body(response)
 
         if body.has_key?('errors')
-          body['errors']
+          case body['errors']
+            when Array
+              body['errors']
+            else
+              # Sometimes Contactually returns an errors key with a nested object instead of a list of errors
+              [body['errors'].to_s]
+          end
         else
           generic_error
         end
