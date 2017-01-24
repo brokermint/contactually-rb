@@ -44,6 +44,20 @@ describe Contactually::Middleware::ErrorHandler do
       end
     end
 
+    context 'when a 402' do
+      it 'raises a PaymentRequiredError' do
+        client = build_client
+        body = '{"errors":{"cause":"disabled"}}'
+
+        stub_request(:get, fake_url).
+          to_return(body: body, status: 402, headers: {'Content-Type' => 'application/json'})
+
+        expect {
+          client.interface.get(fake_url, {})
+        }.to raise_error(Contactually::PaymentRequiredError, /disabled/)
+      end
+    end
+
     context 'when a 403' do
       it 'raises a UnauthorizedError' do
         client = build_client
