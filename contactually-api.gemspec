@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Nick Blumenthal", "Nic Cavigliano"]
   spec.email         = ["nick@realscout.com", "ncavig@gmail.com"]
 
-  spec.summary       = ''
+  spec.summary       = 'Simple wrapper around Contactually v2 API'
   spec.description   = ''
   spec.homepage      = "https://github.com/RealScout/contactually-api"
 
@@ -33,6 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "codeclimate-test-reporter", "~> 0.6.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "pry"
-  spec.add_development_dependency "webmock"
+  spec.add_development_dependency "pry", "~> 0.10"
+  spec.add_development_dependency "webmock", "~> 2.1"
 end
