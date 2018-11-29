@@ -64,12 +64,8 @@ module Contactually
 
     private
 
-    def build_fetch_url(id = nil)
-      if id
-        url + "/" + id.to_s
-      else
-        url
-      end
+    def build_fetch_url(id = nil, path = nil)
+      [url, id, path].compact.join('/')
     end
 
     def list_in_batches(params)

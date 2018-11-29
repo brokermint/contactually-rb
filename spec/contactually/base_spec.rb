@@ -36,6 +36,26 @@ describe Contactually::Base do
     end
   end
 
+  describe '#build_fetch_url' do
+    let(:fake_url) {'some-fake-url' }
+    let(:fake_id) {'some_id' }
+    let(:fake_path) {'some_path' }
+
+    subject { described_class.new(url: fake_url, interface: nil) }
+
+    it 'resource id is specified' do
+      expect(subject.send(:build_fetch_url, fake_id)).to eq("#{fake_url}/#{fake_id}")
+    end
+
+    it 'path is specified' do
+      expect(subject.send(:build_fetch_url, nil, fake_path)).to eq("#{fake_url}/#{fake_path}")
+    end
+
+    it 'resource id and path is specified' do
+      expect(subject.send(:build_fetch_url, fake_id, fake_path)).to eq("#{fake_url}/#{fake_id}/#{fake_path}")
+    end
+  end
+
   def fetch_mock_pagination_response
     <<-JSON
     {

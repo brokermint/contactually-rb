@@ -47,6 +47,68 @@ describe Contactually::Client do
     end
   end
 
+  describe '#pipelines' do
+    let(:client) { build_client }
+    let(:pipelines) { client.pipelines }
+
+    it 'returns a buckets instance' do
+      expect(pipelines).to be_a(Contactually::Pipelines)
+    end
+
+    it 'memoizes the returned instance' do
+      second_pipelines = client.pipelines
+      expect(pipelines.__id__).to eq(second_pipelines.__id__)
+    end
+  end
+
+  describe '#pipeline_deals' do
+    let(:client) { build_client }
+
+    context 'when pipeline_id doesn`t specified' do
+      it 'should raise error' do
+        expect { client.pipeline_deals }.to raise_error StandardError, 'The `pipeline_id` should be specified'
+      end
+    end
+
+    context 'when pipeline_id is specified' do
+      let(:deals) { client.pipeline_deals('some_pipeline_id') }
+
+      it 'returns a buckets instance' do
+        expect(deals).to be_a(Contactually::PipelineDeals)
+      end
+
+      it 'memoizes the returned instance' do
+        deals1 = client.pipeline_deals('some_pipeline_id')
+
+        expect(deals1.__id__).to eq(deals.__id__)
+      end
+    end
+  end
+
+  describe '#contact_deals' do
+    let(:client) { build_client }
+
+    context 'when contact_id doesn`t specified' do
+      it 'should raise error' do
+        expect { client.contact_deals }.to raise_error StandardError, 'The `contact_id` should be specified'
+      end
+    end
+
+    context 'when contact_id is specified' do
+      let(:deals) { client.contact_deals('some_contact_id') }
+
+      it 'returns a buckets instance' do
+        expect(deals).to be_a(Contactually::ContactDeals)
+      end
+
+      it 'memoizes the returned instance' do
+        deals1 = client.contact_deals('some_contact_id')
+
+        expect(deals1.__id__).to eq(deals.__id__)
+      end
+    end
+  end
+
   describe '#tags' do
     it 'returns a tag instance' do
       client = build_client

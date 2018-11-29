@@ -68,6 +68,10 @@ require 'contactually/models/interaction'
 require 'contactually/models/task'
 require 'contactually/models/user'
 
+require 'contactually/models/stage'
+require 'contactually/models/deal'
+require 'contactually/models/pipeline'
+
 require 'contactually/client'
 require 'contactually/base'
 require 'contactually/buckets'
@@ -79,3 +83,7 @@ require 'contactually/me'
 require 'contactually/response'
 require 'contactually/tags'
 require 'contactually/tasks'
+
+require 'contactually/contact_deals'
+require 'contactually/pipeline_deals'
+require 'contactually/pipelines'
