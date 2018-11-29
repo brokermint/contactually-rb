@@ -6,8 +6,8 @@ require 'contactually/version'
 Gem::Specification.new do |spec|
   spec.name          = "contactually-rb"
   spec.version       = Contactually::VERSION
-  spec.authors       = ["Nick Blumenthal", "Nic Cavigliano"]
-  spec.email         = ["nick@realscout.com", "ncavig@gmail.com"]
+  spec.authors       = ["Nick Blumenthal", "Nic Cavigliano", "Mykhailo Odyniuk"]
+  spec.email         = ["nick@realscout.com", "ncavig@gmail.com", "m.odyniuk@gmail.com"]
 
   spec.summary       = 'Simple wrapper around Contactually v2 API'
   spec.description   = ''
@@ -26,8 +26,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "faraday", "~> 0.14.0"
+  spec.add_dependency "faraday" #, "~> 0.14.0"
   spec.add_dependency "faraday_middleware", "~> 0.10.0"
+  spec.add_dependency "memoist", "~> 0.16.0"
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "codeclimate-test-reporter", "~> 0.6.0"

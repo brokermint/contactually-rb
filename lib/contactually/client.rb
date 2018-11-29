@@ -1,5 +1,9 @@
+require 'memoist'
+
 module Contactually
   class Client
+    extend Memoist
+
     attr_reader :interface
 
     def initialize(api_key: nil, auth_token: nil, base_url: 'https://api.contactually.com')
@@ -14,12 +18,31 @@ module Contactually
     end
 
     def buckets
-      @buckets ||= Contactually::Buckets.new(interface: interface)
+      Contactually::Buckets.new(interface: interface)
     end
+    memoize :buckets
 
     def contacts
-      @contacts ||= Contactually::Contacts.new(interface: interface)
+      Contactually::Contacts.new(interface: interface)
     end
+    memoize :contacts
+
+    def pipelines
+      Contactually::Pipelines.new(interface: interface)
+    end
+    memoize :pipelines
+
+    def pipeline_deals(pipeline_id = nil)
+      raise StandardError, 'The `pipeline_id` should be specified' unless pipeline_id
+      Contactually::PipelineDeals.new(url: "/v2/pipelines/#{pipeline_id}/deals", interface: interface)
+    end
+    memoize :pipeline_deals
+
+    def contact_deals(contact_id = nil)
+      raise StandardError, 'The `contact_id` should be specified' unless contact_id
+      Contactually::ContactDeals.new(url: "/v2/pipelines/#{contact_id}/deals", interface: interface)
+    end
+    memoize :contact_deals
 
     def interactions
       @interactions ||= Contactually::Interactions.new(interface: interface)
